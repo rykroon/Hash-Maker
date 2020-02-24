@@ -3,6 +3,8 @@ from hashlib import md5, sha1, sha256, sha512
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+
 
 @app.route('/hash', methods=['GET'])
 def get_hash():
