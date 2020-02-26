@@ -1,12 +1,11 @@
 from base64 import urlsafe_b64encode as b64encode
 from hashlib import md5, sha1, sha256, sha512
-from flask import Flask, jsonify, request
 
-app = Flask(__name__)
-app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+from flask import Blueprint, request, jsonify
 
+hash_bp = Blueprint('hash', __name__)
 
-@app.route('/hash', methods=['GET'])
+@hash_bp.route('/', methods=['GET'], strict_slashes=False)
 def get_hash():
     q = request.args.get('q')
     if q is None:
@@ -37,8 +36,5 @@ def get_hash():
         }
         return jsonify(d)
 
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0')
 
 
