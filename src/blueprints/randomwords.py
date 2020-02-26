@@ -16,15 +16,19 @@ def get_random_words():
     word_length = int(request.args.get('word_length', 0))
     num_of_words = int(request.args.get('num_of_words', 4))
     num_of_words = min(num_of_words, 12)
-
+    starts_with = request.args.get('starts_with')
+    
     words = global_words
 
     if word_length > 0:
         words = [w for w in words if len(w) == word_length]
 
+    if starts_with:
+        words = [w for w in words if w.startswith(starts_with)]
+
     result = []
     for _ in range(num_of_words):
-        idx = randint(0, len(words))
+        idx = randint(0, len(words) - 1)
         result.append(words[idx])
 
     return jsonify(result)
