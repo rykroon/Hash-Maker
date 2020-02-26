@@ -2,9 +2,9 @@ FROM python:3.7
 
 WORKDIR /app
 COPY requirements.txt .
-COPY app.py .
-
+COPY nltk_download.py .
 RUN pip install -r requirements.txt
+RUN python nltk_download.py
 
-ENTRYPOINT ["gunicorn", "-b", "0.0.0.0", "-w", "4", "app:app"]
-
+COPY src src
+WORKDIR /app/src
