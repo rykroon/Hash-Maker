@@ -33,6 +33,7 @@ def get_random_words():
         words = [w for w in words if filter_(w)]
     
     if len(words) < num_of_words:
+        words.sort()
         return jsonify(words)
 
     result = set()
@@ -40,6 +41,8 @@ def get_random_words():
         idx = randint(0, len(words) - 1)
         result.add(words[idx])
 
-    return jsonify(list(result))
+    result = list(result)
+    result.sort()
+    return jsonify(result)
 
 
