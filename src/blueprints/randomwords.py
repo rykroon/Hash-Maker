@@ -1,3 +1,4 @@
+import os
 from random import randint
 from nltk.corpus import stopwords, brown
 from flask import Blueprint, request, jsonify
@@ -15,8 +16,8 @@ global_words = list(diff_set)
 @word_bp.route('/', strict_slashes=False)
 def get_random_words():
     word_length = int(request.args.get('word_length', 0))
-    num_of_words = int(request.args.get('num_of_words', 4))
-    num_of_words = min(num_of_words, 12)
+    num_of_words = int(request.args.get('num_of_words', os.getenv('DEFAULT_NUM_OF_WORDS')))
+    num_of_words = min(num_of_words, os.getenv('MAX_NUM_OF_WORDS'))
     starts_with = request.args.get('starts_with', '').lower()
     
     words = global_words
