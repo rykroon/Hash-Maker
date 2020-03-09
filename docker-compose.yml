@@ -3,7 +3,8 @@ services:
     web:
         build: .
         image: my_droplet_img
-        container_name: "my_droplet"
+        container_name: my_droplet
         ports:
         - "80:8000"
         entrypoint: "gunicorn -b 0.0.0.0 -w 4 app:app"
+        env_file: ./dev/.env
