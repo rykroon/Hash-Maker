@@ -1,9 +1,11 @@
 from random import randint
 from flask import Blueprint, request, jsonify
-from nltk.corpus import wn
+from nltk.corpus import wordnet as wn
 
 adjs = list(wn.all_lemma_names(wn.ADJ))
+adjs = [a for a in adjs if '_' not in a]
 nouns = list(wn.all_lemma_names(wn.NOUN))
+nouns = [n for n in nouns if '_' not in n]
 
 nounphrase_bp = Blueprint('noun-phrase', __name__)
 
